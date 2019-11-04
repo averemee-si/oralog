@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="msg">
+		<xsd:annotation>
+			<xsd:documentation>
+This XML schema describes Oracle Database Automatic Diagnostic Repository (ADR) format
+			</xsd:documentation> 
+		</xsd:annotation> 
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="txt" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>
+							v$diag_alert_ext (x$dbgalertext) MESSAGE_TEXT
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+<!--
+TODO MESSAGE_ARGUMENTS              VARCHAR2(128)
+TODO SUPPLEMENTAL_ATTRIBUTES        VARCHAR2(128)
+TODO SUPPLEMENTAL_DETAILS           VARCHAR2(128)
+-->
+			</xsd:sequence>
+			<xsd:attribute name="time" type="xsd:dateTime" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) ORIGINATING_TIMESTAMP
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="time_norm" type="xsd:dateTime" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) NORMALIZED_TIMESTAMP
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="org_id" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) ORGANIZATION_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="comp_id" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) COMPONENT_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="host_id" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) HOST_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="host_addr" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) HOST_ADDRESS
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="type" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) MESSAGE_TYPE
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="level" type="xsd:unsignedInt" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) MESSAGE_LEVEL
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="msg_id" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) MESSAGE_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="group" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) MESSAGE_GROUP
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="client_id" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) CLIENT_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="module" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) MODULE_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="pid" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) PROCESS_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="tid" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) THREAD_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="user" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) USER_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="inst_id" type="xsd:unsignedByte" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) INST_ID
+						v$diag_alert_ext (x$dbgalertext) INSTANCE_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="detail_path" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) DETAILED_LOCATION
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="prob_key" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) PROBLEM_KEY
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="upstream_comp" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) UPSTREAM_COMP_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="downstream_comp" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) DOWNSTREAM_COMP_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="ecid" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) EXECUTION_CONTEXT_ID
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+<!--
+TODO EXECUTION_CONTEXT_SEQUENCE     NUMBER
+TODO ERROR_INSTANCE_ID              NUMBER
+TODO ERROR_INSTANCE_SEQUENCE        NUMBER 
+-->
+			<xsd:attribute name="errid" type="xsd:unsignedShort" use="optional" />
+			<xsd:attribute name="rid" type="xsd:unsignedShort" use="optional" />
+			<xsd:attribute name="err_seq" type="xsd:unsignedShort" use="optional" />
+
+			<xsd:attribute name="version" type="xsd:unsignedByte" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						v$diag_alert_ext (x$dbgalertext) VERSION
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+    	</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
