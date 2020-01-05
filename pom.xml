@@ -185,6 +185,9 @@
 								<tag>Oracle ADR</tag>
 								<tag>listener.log</tag>
 								<tag>alert.log</tag>
+								<tag>audit</tag>
+								<tag>UBA</tag>
+								<tag>security</tag>
 								<tag>ingest</tag>
 								<tag>capture</tag>
 								<tag>collect</tag>
