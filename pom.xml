@@ -151,11 +151,11 @@
 							<goal>kafka-connect</goal>
 						</goals>
 						<configuration>
-							<title>Kafka Connect Oracle ADR, Oracle Audit</title>
+							<title>Kafka Connect for Oracle ADR and Oracle Audit</title>
 							<documentationUrl>https://github.com/averemee-si/oralog</documentationUrl>
 							<description>
-								Connector for ingestion Oracle ADR, Oracle Audit files to Apache Kafka for further processing online processing with kSQL, or analyzing with ElasticSearch, or advanced processing using various Hadoop tools. 
-								No additional licensing of Oracle Database required.
+								Connector for ingestion Oracle Database Automatic Diagnostic Repository (ADR) files (alert.log and listener.log) and Oracle Database audit files in XML format to Apache Kafka.
+								No additional licensing of Oracle Database and its options required.
 							</description>
 							<logo>logos/a2-oralog.png</logo>
 
@@ -164,7 +164,7 @@
 							<supportUrl>http://a2-solutions.eu/</supportUrl>
 							<supportLogo>logos/a2-solutions.png</supportLogo>
 
-							<ownerUsername>a2-solutions_eu</ownerUsername>
+							<ownerUsername>a2solutions</ownerUsername>
 							<ownerType>organization</ownerType>
 							<ownerName>A2 Rešitve, d.o.o.</ownerName>
 							<ownerUrl>http://a2-solutions.eu/</ownerUrl>
@@ -194,6 +194,8 @@
 								<tag>Hadoop</tag>
 								<tag>data lake</tag>
 								<tag>ElasticSearch</tag>
+								<tag>json</tag>
+								<tag>xml</tag>
 							</tags>
 
 							<requirements>
