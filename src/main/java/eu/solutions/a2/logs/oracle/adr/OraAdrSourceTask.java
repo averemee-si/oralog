@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-present, http://a2-solutions.eu
+ * Copyright (c) 2018-present, A2 Rešitve d.o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -53,8 +53,9 @@ public class OraAdrSourceTask extends SourceTask {
 		fileQueryInterval = Integer.parseInt(props.get(Constants.PARAM_A2_FILE_QUERY_INTERVAL));
 		dataFormat = Integer.parseInt(props.get(Constants.PARAM_A2_DATA_FORMAT));
 		final String filePath = props.get(OraAdrSourceConfig.TASK_PARAM_FILE_PATH);
+		final boolean tailFromEnd = "true".equalsIgnoreCase(props.get(Constants.PARAM_A2_TAIL_FROM_END));
 		AdrTailListener atl = new AdrTailListener(dataFormat, queue, props.get(OraAdrSourceConfig.TASK_PARAM_TOPIC));
-		tailer = new Tailer(new File(filePath), atl, fileQueryInterval, true);
+		tailer = new Tailer(new File(filePath), atl, fileQueryInterval, tailFromEnd);
 		Thread thread = new Thread(tailer);
 		thread.setDaemon(true);
 		thread.start();

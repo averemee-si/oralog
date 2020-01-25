@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-present, http://a2-solutions.eu
+ * Copyright (c) 2018-present, A2 Rešitve d.o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -45,6 +45,10 @@ public class Constants {
 	public static final String PARAM_A2_POLL_INTERVAL = "a2.poll.interval";
 	public static final String PARAM_A2_POLL_INTERVAL_DOC = "Frequency in milliseconds to poll for new data for each task";
 	public static final int PARAM_A2_POLL_INTERVAL_DEFAULT = 100;
+
+	public static final String PARAM_A2_TAIL_FROM_END = "a2.tail.from.end";
+	public static final String PARAM_A2_TAIL_FROM_END_DOC = "When set to true to tail from the end of the file, false to tail from the beginning of the file.";
+	public static final boolean PARAM_A2_TAIL_FROM_END_DEFAULT = true;
 
 	public static final Schema SCHEMA_RAW = SchemaBuilder
 			.struct()

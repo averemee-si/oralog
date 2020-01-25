@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-present, http://a2-solutions.eu
+ * Copyright (c) 2018-present, A2 Rešitve d.o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -30,7 +30,6 @@ public class OraAdrSourceConfig extends AbstractConfig {
 	public static final String PARAM_TOPICS4FILES = "a2.watched.files.topics";
 	private static final String PARAM_TOPICS4FILES_DOC = "List of Kafka topics to send data. Data from ADR file will be sent to corresponding topic";
 
-
 	public static final String TASK_PARAM_TOPIC = "topic";
 	public static final String TASK_PARAM_FILE_PATH = "file";
 
@@ -48,7 +47,13 @@ public class OraAdrSourceConfig extends AbstractConfig {
 						Importance.HIGH,
 						Constants.PARAM_A2_DATA_FORMAT_DOC)
 				.define(PARAM_ADR_LOG_FILES, Type.LIST, Importance.HIGH, PARAM_ADR_LOG_FILES_DOC)
-				.define(PARAM_TOPICS4FILES, Type.LIST, Importance.HIGH, PARAM_TOPICS4FILES_DOC);
+				.define(PARAM_TOPICS4FILES, Type.LIST, Importance.HIGH, PARAM_TOPICS4FILES_DOC)
+				.define(Constants.PARAM_A2_TAIL_FROM_END,
+						Type.BOOLEAN,
+						Constants.PARAM_A2_TAIL_FROM_END_DEFAULT,
+						Importance.HIGH,
+						Constants.PARAM_A2_TAIL_FROM_END_DOC)
+				;
 	}
 
 	public OraAdrSourceConfig(Map<?, ?> originals) {

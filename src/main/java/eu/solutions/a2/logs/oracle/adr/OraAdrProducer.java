@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-present, http://a2-solutions.eu
+ * Copyright (c) 2018-present, A2 Rešitve d.o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -60,6 +60,19 @@ public class OraAdrProducer extends BaseStandaloneProducer  {
 				LOGGER.warn("Setting it to {}", Constants.PARAM_A2_FILE_QUERY_INTERVAL_DEFAULT);
 			}
 		}
+
+		boolean tailFromEnd = Constants.PARAM_A2_TAIL_FROM_END_DEFAULT;
+		final String tailFromEndString = props.getProperty(Constants.PARAM_A2_TAIL_FROM_END);
+		if (tailFromEndString != null && !"".equals(tailFromEndString)) {
+			try {
+				tailFromEnd = Boolean.parseBoolean(tailFromEndString);
+			} catch (Exception e) {
+				LOGGER.warn("Incorrect value for {} -> {}", Constants.PARAM_A2_TAIL_FROM_END, tailFromEndString);
+				LOGGER.warn("Setting it to {}", Constants.PARAM_A2_TAIL_FROM_END_DEFAULT);
+			}
+		}
+		final boolean tailFromEndFinal = tailFromEnd;
+
 		// For use in Lambda
 		final int fileQueryIntervalFinal = fileQueryInterval;
 		String osName = System.getProperty("os.name").toUpperCase();
@@ -90,7 +103,7 @@ public class OraAdrProducer extends BaseStandaloneProducer  {
 				final String msgPrefix = (String) props.getOrDefault(msgPrefixParam, "adr-" + adrTailers.size());
 				// Create listener and tailer
 				AdrTailListener atl = new AdrTailListener(msgPrefix);
-				Tailer tailer = new Tailer(watchedFile, atl, fileQueryIntervalFinal, true);
+				Tailer tailer = new Tailer(watchedFile, atl, fileQueryIntervalFinal, tailFromEndFinal);
 				LOGGER.info("Watching for " + filePath);
 				LOGGER.info("Using prefix " + msgPrefix);
 				// Corresponding thread

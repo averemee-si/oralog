@@ -5,6 +5,7 @@ Parameters for running are:
 `a2.watched.files.topics` - comma separated list of Apache Kafka topics, data from ADR file will be sent to corresponding topic.
 `a2.data.format` - format to send data: RAW or JSON when data converted to JSON
 `a2.file.query.interval` - interval in milliseconds between check for new messages in ADR files
+`a2.tail.from.end` - when set to true (default) to tail from the end of the file, false to tail from the beginning of the file
 
 To run ADR file processing in Kafka Connect mode please review and edit if needed supplied `$A2_LOG_HOME/bin/oraadr-source-connector.sh`. For running this script `$KAFKA_HOME` environment variable must be set and points to valid home of Apache Kafka installation
 
@@ -57,6 +58,8 @@ a2.kafka.client.id = a2.audit.ai.ora112
 
 #### Optional parameters ####
 `a2.data.format` - when set to `RAW` (default value) sends message as raw string in Oracle ADR XML format. When set to `JSON` sends JSON formatted data with field names same as in **[V$DIAG_ALERT_EXT](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/V-DIAG_ALERT_EXT.html)**/**X$DBGALERTEXT**
+
+`a2.tail.from.end` - when set to true (default) to tail from the end of the file, false to tail from the beginning of the file
 
 `a2.kafka.security.protocol` - must be set to `SSL` or `SASL_SSL` if you like to transmit files using SSL and enable auth. Only PLAIN authentication supported and tested at moment.
 
@@ -134,6 +137,8 @@ a2.kinesis.access.secret = AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDD
 #### Optional parameters ####
 
 `a2.data.format` - when set to `RAW` (default value) sends message as raw string in Oracle ADR XML format. When set to `JSON` sends JSON formatted data with field names same as in **[V$DIAG_ALERT_EXT](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/V-DIAG_ALERT_EXT.html)**/**X$DBGALERTEXT**. Usage of JSON formatted data simplifies further delivery using [Amazon Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose/) and processing in DW or data lake.
+
+`a2.tail.from.end` - when set to true (default) to tail from the end of the file, false to tail from the beginning of the file
 
 `a2.kinesis.max.connections` - can be used to control the degree of parallelism when making HTTP requests. Using a high number will cause a bunch of broken pipe errors to show up in the logs. This is due to idle connections being closed by the server. Setting this value too large may also cause request timeouts if you do not have enough bandwidth. **1** is default value
 

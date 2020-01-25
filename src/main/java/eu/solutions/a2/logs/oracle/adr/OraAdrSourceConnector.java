@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-present, http://a2-solutions.eu
+ * Copyright (c) 2018-present, A2 Rešitve d.o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.connector.Task;
+import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.source.SourceConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class OraAdrSourceConnector extends SourceConnector {
 	private OraAdrSourceConfig config;
 	private int fileQueryInterval;
 	private int dataFormat;
+	private boolean tailFromEnd;
 
 	@Override
 	public void start(Map<String, String> props) {
@@ -48,6 +50,7 @@ public class OraAdrSourceConnector extends SourceConnector {
 				config.getString(Constants.PARAM_A2_DATA_FORMAT))) {
 			dataFormat = Constants.DATA_FORMAT_JSON;
 		}
+		tailFromEnd = config.getBoolean(Constants.PARAM_A2_TAIL_FROM_END);
 	}
 
 	@Override
@@ -66,7 +69,7 @@ public class OraAdrSourceConnector extends SourceConnector {
 		if (errorMessage != null) {
 			LOGGER.error(errorMessage);
 			LOGGER.error("Stopping {}", OraAdrSourceConnector.class.getName());
-			throw new RuntimeException(errorMessage);
+			throw new ConnectException(errorMessage);
 		}
 		final List<Map<String, String>> configs = new ArrayList<>(maxTasks);
 		for (int i = 0; i < maxTasks; i++) {
@@ -77,20 +80,21 @@ public class OraAdrSourceConnector extends SourceConnector {
 				LOGGER.error("{} points to nonexisting file {}",
 						OraAdrSourceConfig.PARAM_ADR_LOG_FILES, filesToWatch.get(i));
 				LOGGER.error("Stopping {}", OraAdrSourceConnector.class.getName());
-				throw new RuntimeException();
+				throw new ConnectException(filesToWatch.get(i) + " not exist.");
 			}
 			// Sanity check - must be file
 			if (!watchedFile.isFile()) {
 				LOGGER.error("{} must be file.", filesToWatch.get(i));
 				LOGGER.error("Stopping {}", OraAdrSourceConnector.class.getName());
-				throw new RuntimeException();
+				throw new ConnectException(filesToWatch.get(i) + " must be file.");
 			}
 
-			final Map<String, String> taskParam = new HashMap<>(4);
+			final Map<String, String> taskParam = new HashMap<>(5);
 			taskParam.put(OraAdrSourceConfig.TASK_PARAM_FILE_PATH, filesToWatch.get(i));
 			taskParam.put(OraAdrSourceConfig.TASK_PARAM_TOPIC, topicsToSend.get(i));
 			taskParam.put(Constants.PARAM_A2_FILE_QUERY_INTERVAL, Integer.toString(fileQueryInterval));
 			taskParam.put(Constants.PARAM_A2_DATA_FORMAT, Integer.toString(dataFormat));
+			taskParam.put(Constants.PARAM_A2_TAIL_FROM_END, Boolean.toString(tailFromEnd));
 			configs.add(taskParam);
 		}
 		return configs;
