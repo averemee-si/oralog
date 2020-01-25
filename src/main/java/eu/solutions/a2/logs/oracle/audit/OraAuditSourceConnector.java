@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-present, http://a2-solutions.eu
+ * Copyright (c) 2018-present, A2 Rešitve d.o.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.connector.Task;
+import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.source.SourceConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,13 +52,13 @@ public class OraAuditSourceConnector extends SourceConnector {
 			Boolean isFolder = (Boolean) Files.getAttribute(watchedPathNio, "basic:isDirectory", LinkOption.NOFOLLOW_LINKS);
 			if (!isFolder) {
 				LOGGER.error("Path specified by {} parameter [{}] is not a folder", Constants.PARAM_A2_WATCHED_PATH, watchedPathNio);
-				throw new RuntimeException(watchedPath + " is not a folder!");
+				throw new ConnectException(watchedPath + " is not a folder!");
 			}
 		} catch (IOException ioe) {
 			// Folder does not exists
 			LOGGER.error(ExceptionUtils.getExceptionStackTrace(ioe));
 			LOGGER.error("Path specified by {} parameter [{}] not exist!", Constants.PARAM_A2_WATCHED_PATH, watchedPathNio);
-			throw new RuntimeException(watchedPath + " does not exist!");
+			throw new ConnectException(watchedPath + " does not exist!");
 		}
 
 		OraAuditSourceXmlFilesSingleton filesProcessor = OraAuditSourceXmlFilesSingleton.getInstance();
