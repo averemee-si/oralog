@@ -41,7 +41,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<commons-io.version>2.6</commons-io.version>
 		<kafka.version>2.3.1</kafka.version>
 		<kinesis.client.version>2.2.7</kinesis.client.version>
