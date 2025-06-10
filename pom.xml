@@ -43,7 +43,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<junit.version>4.13.1</junit.version>
 		<commons-io.version>2.14.0</commons-io.version>
-		<kafka.version>3.7.1</kafka.version>
+		<kafka.version>3.9.1</kafka.version>
 		<kinesis.client.version>2.2.7</kinesis.client.version>
 		<jackson.version>2.10.0</jackson.version>
 		<slf4j.version>1.7.28</slf4j.version>
